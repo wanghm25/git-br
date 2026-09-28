@@ -1,35 +1,41 @@
 {
-  "name": "git-br",
-  "description": "List of local Git repository branches with their descriptions.",
-  "version": "0.0.0-semantic-release",
+  "name": "@wanghm25/git-br",
+  "description": "A clear, worktree-aware view of local Git branches and their descriptions.",
+  "version": "2.0.0",
+  "author": "wanghm25",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bahmutov/git-branches.git"
+    "url": "git+https://github.com/wanghm25/git-br.git"
   },
+  "homepage": "https://github.com/wanghm25/git-br#readme",
+  "bugs": "https://github.com/wanghm25/git-br/issues",
   "bin": {
-    "git-br": "./branches.sh"
+    "git-br": "./bin/git-br.js"
+  },
+  "files": [
+    "bin/git-br.js",
+    "LICENSE-MIT",
+    "README.md",
+    "README.zh-CN.md"
+  ],
+  "engines": {
+    "node": ">=18"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- --harmony --reporter spec --timeout 5000 --inline-diffs ./test/git-br.test.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "commit": "commit-wizard"
+    "check": "node --check bin/git-br.js",
+    "test": "jest --runInBand"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "git",
+    "branch",
+    "worktree",
+    "cli"
+  ],
   "devDependencies": {
-    "exeq": "^3.0.0",
-    "expect.js": "^0.3.1",
-    "istanbul": "^0.4.4",
-    "mocha": "^2.5.3",
-    "pre-git": "3.10.0",
-    "semantic-release": "^4.3.5"
-  },
-  "config": {
-    "pre-git": {
-      "commit-msg": "simple",
-      "pre-commit": ["npm test"],
-      "pre-push": [],
-      "post-commit": [],
-      "post-checkout": [],
-      "post-merge": []
-    }
+    "jest": "30.5.2"
   }
 }

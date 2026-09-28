@@ -1,96 +1,65 @@
-# git-branches
+# git-br
 
-> List of local Git repository branches with their descriptions.
+[简体中文](README.zh-CN.md)
 
-[![semantic-release][semantic-image] ][semantic-url]
-[![NPM version][npm-badge]][npm-url]
-[![Build status][git-branches-ci-image] ][git-branches-ci-url]
+`git br` shows local branches with their descriptions and worktree locations. Branch names stay on their own lines so they are easy to select and copy.
 
-That's right: descriptions! This does not use anything custom, just
-shows the information available in any git repo > v1.7.9
-
-```bash
-$ git branch --edit-description
-; opens editor, write something, save and exit
-; or simply use
-$ git config branch.master.description "description text"
-$ git config branch.master.description
-; shows description of branch master
+```text
+* feature/current
+  ├─ description: Working on the current branch
+  └─ worktree: current
+  main
+  └─ last commit: Release v1.0.0
++ feature/another-worktree
+  ├─ last commit: Update documentation
+  └─ worktree: ~/projects/another-worktree
 ```
 
-Use the [branches.sh](branches.sh) script to show all branches
-with their descriptions at once, for example, I have two branches
+`*` marks the branch checked out here, `+` marks a branch checked out in another worktree, and a blank marker means an ordinary local branch. The current branch appears first, followed by the repository's main branch; the rest are sorted by name. The main branch is read from `origin/HEAD` when available, with `main` and `master` as local fallbacks.
 
-```bash
-$ git-branch-description
-* master        this is master branch
-one             this is simple branch for testing
-```
-
-This is same information as `git branch`, with descriptions in the
-second column.
+The detail line uses `branch.<name>.description` when set, otherwise the latest commit subject. Colors are enabled in an interactive terminal and disabled for redirected output or when `NO_COLOR` is set. Branch names and worktree paths are never truncated by the program.
 
 ## Install
 
-```bash
-$ npm install git-br -g
+Requires Node.js 18 or newer and a Git version supporting `git for-each-ref` and `git worktree list --porcelain -z`.
+
+Once this version is published on npm:
+
+```sh
+npm uninstall --global git-br
+npm install --global @wanghm25/git-br
 ```
 
-## git alias
+For development from a local checkout:
 
-Alias git sub-command by:
-
-```bash
-$ git config --global alias.br !git-br
+```sh
+npm install --global /path/to/git-br
 ```
 
-then we can use it like:
+The npm package is named `@wanghm25/git-br`, but its executable remains `git-br`; Git discovers it as the `git br` subcommand. If the old `git-br` package is installed, remove it first because both packages provide the same executable.
 
-```bash
-$ git br
-* master        this is master branch
-one             this is simple branch for testing
+## Use
+
+```sh
+git br
+git br --no-color
+git br --help
+git br --version
 ```
 
-## Adding to .bash_profile
+Set a description for the current branch with `git branch --edit-description`. For creating, deleting, renaming, or switching branches, use Git's own `git branch` and `git switch` commands. Other arguments to `git br` are rejected.
 
-I found it convenient to add this feature as a function to my `.bash_profile`
-or `.alias` file
+## Develop
 
-```bash
-; .bash_profile
-; list git branches with their descriptions
-function branches() {
-    branch=""
-    branches=`git branch --list`
-    while read -r branch; do
-    clean_branch_name=${branch//\*\ /}
-    description=`git config branch.$clean_branch_name.description`
-    printf "%-15s %s\n" "$branch" "$description"
-    done <<< "$branches"
-}
+```sh
+npm ci
+npm run check
+npm test
+npm pack --dry-run
 ```
 
-Then anywhere in the shell I can use command `branches`
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution and release preparation notes.
 
-### Small print
+## Origin and license
 
-Author: Gleb Bahmutov &copy; 2014
-
-* [@bahmutov](https://twitter.com/bahmutov)
-* [glebbahmutov.com](http://glebbahmutov.com)
-* [blog](http://glebbahmutov.com/blog)
-
-License: MIT - do anything with the code, but don't blame me if it does not work.
-
-Spread the word: tweet, star on github, etc.
-
-Support: if you find any problems with this module, email / tweet /
-[open issue](https://github.com/bahmutov/git-branches/issues) on Github
-
-[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-url]: https://github.com/semantic-release/semantic-release
-[npm-badge]: https://img.shields.io/npm/v/git-br.svg?style=flat
-[npm-url]: https://www.npmjs.com/package/git-br
-[git-branches-ci-image]: https://travis-ci.org/bahmutov/git-branches.svg?branch=master
-[git-branches-ci-url]: https://travis-ci.org/bahmutov/git-branches
+This repository is a fork of [bahmutov/git-branches](https://github.com/bahmutov/git-branches), created by Gleb Bahmutov. The branch reader and output were rewritten for current Git worktrees. The original copyright notice is retained in [LICENSE-MIT](LICENSE-MIT); this fork is also distributed under the MIT License.
