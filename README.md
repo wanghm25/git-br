@@ -47,7 +47,7 @@ git br --help
 git br --version
 ```
 
-Set a description for the current branch with `git branch --edit-description`. For creating, deleting, renaming, or switching branches, use Git's own `git branch` and `git switch` commands. Other arguments to `git br` are rejected.
+Set a description for the current branch with `git branch --edit-description`. For creating, deleting, renaming, or switching branches, use Git's own `git branch` and `git checkout` commands. Other arguments to `git br` are rejected.
 
 ## Develop
 

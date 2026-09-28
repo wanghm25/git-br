@@ -47,7 +47,7 @@ git br --help
 git br --version
 ```
 
-使用 `git branch --edit-description` 设置当前分支描述。创建、删除、重命名或切换分支仍使用 Git 自带的 `git branch`、`git switch`；`git br` 会拒绝其他参数。
+使用 `git branch --edit-description` 设置当前分支描述。创建、删除、重命名或切换分支仍使用 Git 自带的 `git branch`、`git checkout`；`git br` 会拒绝其他参数。
 
 ## 开发
 
