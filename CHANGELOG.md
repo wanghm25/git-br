@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 — Unreleased
+## 2.0.0 — 2026-09-28
 
 - Rewrote branch reading with structured Git output to handle worktrees correctly.
 - Kept branch descriptions and added the latest commit subject as a fallback.

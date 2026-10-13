@@ -23,7 +23,7 @@ The detail line uses `branch.<name>.description` when set, otherwise the latest 
 
 Requires Node.js 18 or newer and a Git version supporting `git for-each-ref` and `git worktree list --porcelain -z`.
 
-Once this version is published on npm:
+Install the published package from npm:
 
 ```sh
 npm uninstall --global git-br

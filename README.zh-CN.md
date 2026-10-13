@@ -23,7 +23,7 @@
 
 需要 Node.js 18 或更新版本，以及支持 `git for-each-ref` 和 `git worktree list --porcelain -z` 的 Git。
 
-本版本发布到 npm 后：
+从 npm 安装已发布的版本：
 
 ```sh
 npm uninstall --global git-br
